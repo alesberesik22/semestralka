@@ -47,7 +47,7 @@ public class WeatherStationTest {
                                     response.errorBody().string() : ""));
             Map<String, String> body = response.body();
 
-            assertEquals(body.get("Time"), LocalTime.now().format(timeFormat));
+            assertEquals(body.get("Time"), LocalTime.now().minusHours(2).format(timeFormat));
             assertEquals(body.get("Date"), LocalDate.now().format(dateFormat));
             System.out.println(body);
         } catch (IOException e) {
@@ -105,7 +105,7 @@ public class WeatherStationTest {
                                     response.errorBody().string() : ""));
             Map<String, String> body = response.body();
 
-            assertEquals(LocalTime.now().format(timeFormat), body.get("Time"));
+            assertEquals(LocalTime.now().minusHours(2).format(timeFormat), body.get("Time"));
             assertEquals(LocalDate.now().format(dateFormat), body.get("Date"));
             assertTrue(body.containsKey("Air Temperature"));
             assertFalse(body.containsKey("Humidity"));
@@ -136,7 +136,7 @@ public class WeatherStationTest {
                                     response.errorBody().string() : ""));
             WeatherData body = response.body();
 
-            assertEquals(LocalTime.now().format(timeFormat), body.getTime());
+            assertEquals(LocalTime.now().minusHours(2).format(timeFormat), body.getTime());
             assertEquals(LocalDate.now().format(dateFormat), body.getDate());
             System.out.println(body);
         } catch (IOException e) {
